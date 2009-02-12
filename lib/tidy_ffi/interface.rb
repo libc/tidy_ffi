@@ -1,4 +1,4 @@
-# Interface to libtidy.
+# Low level interface to libtidy.
 class TidyFFI::Interface
   LibTidy = TidyFFI::LibTidy
 
@@ -13,6 +13,18 @@ class TidyFFI::Interface
 
   def initialize(doc) #:nodoc:
     @doc = doc
+  end
+
+  # Apply options
+  def apply_options(options)
+    options.each do |key, value|
+      k = key.to_s.gsub('_', '-')
+
+      option = LibTidy.tidyGetOptionByName(@doc, k)
+      raise ArgumentError, "don't know about option #{key}" if option.null?
+      id = LibTidy.tidyOptGetId(option)
+      raise ArgumentError, "can't setup option #{key} to #{value}" if LibTidy.tidyOptSetValue(@doc, id, value.to_s) == 0
+    end
   end
 
   # Sets string to tidy

@@ -5,8 +5,11 @@ README
 Rakefile
 lib/tidy_ffi/interface.rb
 lib/tidy_ffi/lib_tidy.rb
+lib/tidy_ffi/options_container.rb
 lib/tidy_ffi/tidy.rb
 lib/tidy_ffi/tidy_ffi_extensions.rb
 lib/tidy_ffi.rb
 test/test_helper.rb
+test/test_options.rb
 test/test_simple.rb
+tidy_ffi.gemspec

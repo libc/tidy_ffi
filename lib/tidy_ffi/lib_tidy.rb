@@ -1,3 +1,5 @@
+# Very low level interface to tidy
+
 # This file must be lazy loaded!
 class TidyFFI::LibTidy #:nodoc:
   extend FFI::Library
@@ -18,6 +20,10 @@ class TidyFFI::LibTidy #:nodoc:
   attach_function :tidySetErrorBuffer, [:pointer, :pointer], :int
 
   attach_function :tidyBufFree, [:pointer], :void
+
+  attach_function :tidyGetOptionByName, [:pointer, :string], :pointer
+  attach_function :tidyOptGetId, [:pointer], :int
+  attach_function :tidyOptSetValue, [:pointer, :int, :string], :int
 end
 
 class TidyFFI::LibTidy::TidyBuf < FFI::Struct #:nodoc:
