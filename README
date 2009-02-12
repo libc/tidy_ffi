@@ -1,0 +1,6 @@
+=Tidy FFI
+==Purpose
+I wanna clean and simple tidy library. For example:
+  TidyFFI::Tidy.new('a string').clean
+
+For now it can't do anything else than clean :)

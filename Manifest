@@ -1,0 +1,12 @@
+CHANGELOG
+LICENSE
+Manifest
+README
+Rakefile
+lib/tidy_ffi/interface.rb
+lib/tidy_ffi/lib_tidy.rb
+lib/tidy_ffi/tidy.rb
+lib/tidy_ffi/tidy_ffi_extensions.rb
+lib/tidy_ffi.rb
+test/test_helper.rb
+test/test_simple.rb
