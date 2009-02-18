@@ -1,6 +1,6 @@
 = Tidy FFI
 
-== Purpose
+== What is it all about?
 
 I wanna clean and simple tidy library. For example:
   TidyFFI::Tidy.new('a string').clean
@@ -20,4 +20,10 @@ You can use different ways to set up options. These examples are produces the sa
   tidy.options.show_body_only = true
   tidy.clean
 
-  
+  TidyFFI::Tidy.new('test', :show_body_only => true).clean
+
+== Links
+
+* Source code: http://github.com/libc/tidy_ffi
+* Bug tracker: http://rubyforge.org/tracker/?atid=30230&group_id=7805&func=browse
+* Rubyforge project: http://rubyforge.org/projects/tidy-ffi/

@@ -1,7 +1,11 @@
 # Clean and simple interface to Tidy
 class TidyFFI::Tidy
   OptionsContainer = TidyFFI::OptionsContainer
-  # Initialized object. str is a string to tidy, options is ignored for now :)
+
+  #Initializing object.
+  #
+  #* str is a string to tidy
+  #* options are options for tidy
   def initialize(str, options = {})
     @string = str
     @options = OptionsContainer.new(self.class.default_options)
