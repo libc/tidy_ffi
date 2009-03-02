@@ -50,6 +50,10 @@ class TidyFFI::Interface
     end
   end
 
+  def errors
+    @error_buffer[:bp]
+  end
+
   # Redirects error buffer
   def with_redirected_error_buffer
     with_buffer_pointer do |buf|

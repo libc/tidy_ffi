@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{tidy_ffi}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Eugene Pimenov"]
-  s.date = %q{2009-02-18}
+  s.date = %q{2009-03-02}
   s.description = %q{Tidy library interface via FFI}
   s.email = %q{}
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README", "lib/tidy_ffi/interface.rb", "lib/tidy_ffi/lib_tidy.rb", "lib/tidy_ffi/options_container.rb", "lib/tidy_ffi/tidy.rb", "lib/tidy_ffi/tidy_ffi_extensions.rb", "lib/tidy_ffi.rb"]

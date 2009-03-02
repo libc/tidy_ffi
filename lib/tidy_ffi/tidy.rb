@@ -18,7 +18,16 @@ class TidyFFI::Tidy
       doc.apply_options(@options.to_hash!)
       doc.string = @string
       doc.clean
+      @errors = doc.errors
       doc.output
+    end
+  end
+
+  # Returns errors for string
+  def errors
+    @errors ||= begin
+      clean
+      @errors
     end
   end
 

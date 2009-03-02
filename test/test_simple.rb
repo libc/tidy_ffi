@@ -5,17 +5,26 @@ class TestSimple < Test::Unit::TestCase
   context "TidyFFI::Tidy" do
     context "public interface" do
       [[:initialize, -2],
-       [:clean, 0]].each do |method, arity|
+       [:clean, 0],
+       [:errors, 0]].each do |method, arity|
          it "method #{method} has arity #{arity}" do
            T.instance_method(method).arity.should == arity
          end
        end
     end
-    
+
     context "simple cleanup" do
       it "clean up text" do
         T.new("test").clean.should =~ %r{<body>\s+test\s+</body>}
         T.new("test").clean.should =~ %r{<meta name="generator" content=.+?Tidy.+?>}m
+      end
+    end
+
+    context "should have method for errors" do
+      it "have method for errors" do
+        t = T.new("test")
+        t.clean
+        t.errors.should == "line 1 column 1 - Warning: missing <!DOCTYPE> declaration\nline 1 column 1 - Warning: plain text isn't allowed in <head> elements\nline 1 column 1 - Warning: inserting missing 'title' element\n"
       end
     end
   end
