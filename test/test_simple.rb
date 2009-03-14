@@ -27,5 +27,22 @@ class TestSimple < Test::Unit::TestCase
         t.errors.should == "line 1 column 1 - Warning: missing <!DOCTYPE> declaration\nline 1 column 1 - Warning: plain text isn't allowed in <head> elements\nline 1 column 1 - Warning: inserting missing 'title' element\n"
       end
     end
+
+    # Commented out, because of broken upstream matchy gem :(
+    # context "options validation" do
+    #   it "raises error on invalid option name" do
+    #     TidyFFI::Tidy.validate_options = true
+    #     lambda do
+    #       TidyFFI::Tidy.default_options = {:complete_garbage => true}
+    #     end.should raise_error(TidyFFI::Tidy::InvalidOptionName)
+    #   end
+    # 
+    #   it "raises error on invalid option value" do
+    #     TidyFFI::Tidy.validate_options = true
+    #     lambda do
+    #       TidyFFI::Tidy.default_options = {:force_output => "utter trash"}
+    #     end.should raise_error(TidyFFI::Tidy::InvalidOptionValue)
+    #   end
+    # end
   end
 end

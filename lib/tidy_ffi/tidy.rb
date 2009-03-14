@@ -1,6 +1,8 @@
 # Clean and simple interface to Tidy
 class TidyFFI::Tidy
   OptionsContainer = TidyFFI::OptionsContainer
+  class InvalidOptionName < ArgumentError; end
+  class InvalidOptionValue < ArgumentError; end
 
   #Initializing object.
   #
@@ -66,5 +68,11 @@ class TidyFFI::Tidy
     def with_options(options)
       OptionsContainer::Proxy.new(self, @default_options, options)
     end
+
+    # When true it validates name and option type (default is true).
+    def validate_options?
+      @validate_options != false
+    end
+    attr_writer :validate_options
   end
 end

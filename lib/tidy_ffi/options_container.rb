@@ -1,4 +1,5 @@
 class TidyFFI::OptionsContainer #:nodoc:
+  
   def initialize(ops = nil)
     if ops
       @options = ops.to_hash!
@@ -14,6 +15,7 @@ class TidyFFI::OptionsContainer #:nodoc:
   def merge_with_options(options)
     options.each do |key, val|
       key = key.intern unless Symbol === key
+      validate_option(key, val)
       @options[key] = val
     end
   end
@@ -35,12 +37,26 @@ class TidyFFI::OptionsContainer #:nodoc:
 
   def method_missing(method, *args)
     if method.to_s =~ /=$/
-      @options[method.to_s.sub(/=$/, '').intern] = args.first
+      key, val = method.to_s.sub(/=$/, '').intern, args.first
+      validate_option(key, val)
+      @options[key] = val
     else
       @options[method]
     end
   end
-  
+
+  # It's a kinda bad method: it uses TidyFFI::Interface.option_valid and TidyFFI::Tidy.validate_options?
+  # Also it do second lookup into default options
+  def validate_option(key, value)
+    if TidyFFI::Tidy.validate_options? && !TidyFFI::Interface.option_valid?(key, value)
+      if TidyFFI::Interface.default_options[key]
+        raise TidyFFI::Tidy::InvalidOptionValue, "#{value} is not valid for #{key}"
+      else
+        raise TidyFFI::Tidy::InvalidOptionName, "#{key} is invalid option name"
+      end
+    end
+  end
+
   class Proxy #:nodoc:
     attr_reader :options
 

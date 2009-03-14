@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 class TestOptions < Test::Unit::TestCase
   T = TidyFFI::Tidy
   context "public interface" do
-    [:default_options, :default_options=, :with_options].each do |method|
+    [:default_options, :default_options=, :with_options, :validate_options].each do |method|
       it "responds to #{method}" do
         T.respond_to?(method)
       end
@@ -13,6 +13,7 @@ class TestOptions < Test::Unit::TestCase
   context "default_options method" do
     before :each do
       T.default_options.clear!
+      T.validate_options = false
     end
 
     context "equals version" do
@@ -38,7 +39,7 @@ class TestOptions < Test::Unit::TestCase
       T.default_options.option = 1
       T.default_options.option.should == 1
     end
-    
+
     it "sets optons after creation" do
       T.new('test').options.option.should == nil
       T.default_options.option = 1
@@ -48,6 +49,7 @@ class TestOptions < Test::Unit::TestCase
 
   context "options method" do
     before :each do
+      T.validate_options = false
       T.default_options.clear!
       @t = T.new('test')
     end
@@ -68,7 +70,7 @@ class TestOptions < Test::Unit::TestCase
         @t.options.should == {:test => 1, :test2 => 42, :test3 => 3}
       end
     end
-    
+
     context "clear! method" do
       it "clears options' options" do
         @t.options.test = 1
@@ -89,12 +91,12 @@ class TestOptions < Test::Unit::TestCase
         @t.options.test.should == nil
       end
     end
-    
+
     it "saves options" do
       @t.options.option = 1
       @t.options.option.should == 1
     end
-    
+
     it "passes options to libtidy" do
       @t.options.show_body_only = 1
       @t.clean.should == "test\n"
@@ -102,20 +104,24 @@ class TestOptions < Test::Unit::TestCase
   end
 
   context "with_options proxy class" do
+    before :each do
+      T.validate_options = false
+    end
+
     it "has options method" do
       T.with_options(:test => 1).options.test.should == 1
     end
-    
+
     it "has clear! method" do
       T.with_options(:test => 1).clear!.options.test.should == nil
     end
-    
+
     it "chain methods" do
       proxy = T.with_options(:test => 1).with_options(:test2 => 2)
       proxy.options.test.should == 1
       proxy.options.test2.should == 2
     end
-    
+
     it "passes options to object" do
       T.with_options(:test => 1).new('test').options.test.should == 1
     end
