@@ -9,11 +9,11 @@ Gem::Specification.new do |s|
   s.date = %q{2009-03-14}
   s.description = %q{Tidy library interface via FFI}
   s.email = %q{}
-  s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README", "lib/tidy_ffi/interface.rb", "lib/tidy_ffi/lib_tidy.rb", "lib/tidy_ffi/options_container.rb", "lib/tidy_ffi/tidy.rb", "lib/tidy_ffi/tidy_ffi_extensions.rb", "lib/tidy_ffi.rb"]
-  s.files = ["CHANGELOG", "LICENSE", "Manifest", "README", "Rakefile", "lib/tidy_ffi/interface.rb", "lib/tidy_ffi/lib_tidy.rb", "lib/tidy_ffi/options_container.rb", "lib/tidy_ffi/tidy.rb", "lib/tidy_ffi/tidy_ffi_extensions.rb", "lib/tidy_ffi.rb", "test/test_helper.rb", "test/test_options.rb", "test/test_simple.rb", "tidy_ffi.gemspec", "test/test_lowlevel.rb"]
+  s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.rdoc", "lib/tidy_ffi/interface.rb", "lib/tidy_ffi/lib_tidy.rb", "lib/tidy_ffi/options_container.rb", "lib/tidy_ffi/tidy.rb", "lib/tidy_ffi/tidy_ffi_extensions.rb", "lib/tidy_ffi.rb"]
+  s.files = ["CHANGELOG", "LICENSE", "Manifest", "README.rdoc", "Rakefile", "lib/tidy_ffi/interface.rb", "lib/tidy_ffi/lib_tidy.rb", "lib/tidy_ffi/options_container.rb", "lib/tidy_ffi/tidy.rb", "lib/tidy_ffi/tidy_ffi_extensions.rb", "lib/tidy_ffi.rb", "test/test_helper.rb", "test/test_lowlevel.rb", "test/test_options.rb", "test/test_simple.rb", "tidy_ffi.gemspec"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/libc/tidy_ffi}
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Tidy_ffi", "--main", "README"]
+  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Tidy_ffi", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{tidy-ffi}
   s.rubygems_version = %q{1.3.1}

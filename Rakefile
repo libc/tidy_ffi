@@ -8,7 +8,12 @@ begin
     p.runtime_dependencies = ['ffi >= 0.2.0']
     # p.development_dependencies = ['rr', 'matchy', 'context']
     p.project = 'tidy-ffi'
+    p.rdoc_pattern = /^(lib|bin|tasks|ext)|^README\.rdoc|^CHANGELOG|^TODO|^LICENSE|^COPYING$/
+    p.retain_gemspec = true
   end
+
+  # My common error 
+  task :rdoc => :doc do; end
 rescue LoadError => boom
   puts "You are missing a dependency required for meta-operations on this gem."
   puts "#{boom.to_s.capitalize}."
