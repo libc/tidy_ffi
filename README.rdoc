@@ -22,8 +22,10 @@ You can use different ways to set up options. These examples are produces the sa
 
   TidyFFI::Tidy.new('test', :show_body_only => true).clean
 
+  TidyFFI::Tidy.clean('test', :show_body_only => 1)
+
 == Links
 
 * Source code: http://github.com/libc/tidy_ffi
 * Bug tracker: http://rubyforge.org/tracker/?atid=30230&group_id=7805&func=browse
-* Rubyforge project: http://rubyforge.org/projects/tidy-ffi/
+* Rubyforge project: http://rubyforge.org/projects/tidy-ffi

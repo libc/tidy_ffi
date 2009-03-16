@@ -17,6 +17,9 @@ class TestSimple < Test::Unit::TestCase
       it "clean up text" do
         T.new("test").clean.should =~ %r{<body>\s+test\s+</body>}
         T.new("test").clean.should =~ %r{<meta name="generator" content=.+?Tidy.+?>}m
+
+        T.clean("test").should =~ %r{<body>\s+test\s+</body>}
+        T.clean("test").should =~ %r{<meta name="generator" content=.+?Tidy.+?>}m
       end
     end
 
@@ -27,6 +30,7 @@ class TestSimple < Test::Unit::TestCase
         t.errors.should == "line 1 column 1 - Warning: missing <!DOCTYPE> declaration\nline 1 column 1 - Warning: plain text isn't allowed in <head> elements\nline 1 column 1 - Warning: inserting missing 'title' element\n"
       end
     end
+
 
     # Commented out, because of broken upstream matchy gem :(
     # context "options validation" do

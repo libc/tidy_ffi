@@ -101,6 +101,10 @@ class TestOptions < Test::Unit::TestCase
       @t.options.show_body_only = 1
       @t.clean.should == "test\n"
     end
+
+    it "passes options to clean class method" do
+      T.with_options(:show_body_only => true).clean("test").should == "test\n"
+    end
   end
 
   context "with_options proxy class" do

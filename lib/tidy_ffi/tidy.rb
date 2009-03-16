@@ -25,6 +25,11 @@ class TidyFFI::Tidy
     end
   end
 
+  # Returns cleaned string
+  def self.clean(str, options = {})
+    new(str, options).clean
+  end
+
   # Returns errors for string
   def errors
     @errors ||= begin

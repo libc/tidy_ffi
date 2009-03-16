@@ -64,6 +64,10 @@ class TidyFFI::OptionsContainer #:nodoc:
       @obj.new(args.first, options.to_hash!.merge(args[1] || {}))
     end
 
+    def clean(str, opts = {})
+      @obj.clean(str, options.to_hash!.merge(opts))
+    end
+
     def initialize(obj, options1, options2)
       @obj = obj
       @options = TidyFFI::OptionsContainer.new(options1)
