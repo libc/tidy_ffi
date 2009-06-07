@@ -90,24 +90,24 @@ class TidyFFI::Interface
     #
     # Some tidy options might try to trespass as integer, and in order to caught
     # perpertraitors we need to call tidyOptGetPickList
-    def pic_list_for(opt)
+    def pick_list_for(opt)
       iterator = LibTidy.tidyOptGetPickList(opt)
 
       return nil if iterator.null?
 
-      pic_list = []
+      pick_list = []
 
-      MemoryPointer.new(:pointer) do |pointer|
+      FFI::MemoryPointer.new(:pointer, 1) do |pointer|
         pointer.put_pointer(0, iterator)
         until iterator.null?
-          pic_list << LibTidy.tidyOptGetNextPick(opt, pointer)
+          pick_list << LibTidy.tidyOptGetNextPick(opt, pointer)
           iterator = pointer.get_pointer(0)
         end
       end
 
-      pic_list
+      pick_list
     end
-    private :pic_list_for
+    private :pick_list_for
     
     # Loads default options.
     def load_default_options
@@ -118,7 +118,7 @@ class TidyFFI::Interface
 
       @default_options = {}
 
-      MemoryPointer.new(:pointer) do |pointer|
+      FFI::MemoryPointer.new(:pointer, 1) do |pointer|
         pointer.put_pointer(0, iterator)
 
         until iterator.null?
@@ -133,10 +133,10 @@ class TidyFFI::Interface
           when :string
             (LibTidy.tidyOptGetDefault(opt) rescue "")
           when :integer
-            if pic_list = pic_list_for(opt)
+            if pick_list = pick_list_for(opt)
               option[:type] = :enum
-              option[:values] = pic_list
-              pic_list[LibTidy.tidyOptGetDefaultInt(opt)]
+              option[:values] = pick_list
+              pick_list[LibTidy.tidyOptGetDefaultInt(opt)]
             else
               LibTidy.tidyOptGetDefaultInt(opt)
             end
@@ -149,8 +149,8 @@ class TidyFFI::Interface
           iterator = pointer.get_pointer(0)
         end
 
-        @default_options.freeze
       end
+      @default_options.freeze
     ensure
       LibTidy.tidyRelease(doc)
     end

@@ -5,9 +5,10 @@ begin
     p.author = 'Eugene Pimenov'
     p.summary = 'Tidy library interface via FFI'
     p.url = 'http://github.com/libc/tidy_ffi'
-    p.runtime_dependencies = ['ffi >= 0.2.0']
+    p.runtime_dependencies = ['ffi >=0.3.5']
     # p.development_dependencies = ['rr', 'matchy', 'context']
     p.project = 'tidy-ffi'
+    p.email = 'libc@libc.st'
     p.rdoc_pattern = /^(lib|bin|tasks|ext)|^README\.rdoc|^CHANGELOG|^TODO|^LICENSE|^COPYING$/
     p.retain_gemspec = true
   end
