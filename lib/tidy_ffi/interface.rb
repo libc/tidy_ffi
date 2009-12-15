@@ -68,6 +68,7 @@ class TidyFFI::Interface
   # Yields block with new buffer
   def with_buffer_pointer
     buf = tidy_buf_object.new
+    LibTidy.tidyBufInit(buf)
     yield buf
   ensure
     LibTidy.tidyBufFree(buf)

@@ -19,6 +19,7 @@ class TidyFFI::LibTidy #:nodoc:
 
   attach_function :tidySetErrorBuffer, [:pointer, :pointer], :int
 
+  attach_function :tidyBufInit, [:pointer], :void
   attach_function :tidyBufFree, [:pointer], :void
 
   attach_function :tidyGetOptionByName, [:pointer, :string], :pointer

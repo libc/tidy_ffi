@@ -21,13 +21,17 @@ class TestSimple < Test::Unit::TestCase
         T.clean("test").should =~ %r{<body>\s+test\s+</body>}
         T.clean("test").should =~ %r{<meta name="generator" content=.+?Tidy.+?>}m
       end
+
+      it "doesn't die if called twice (bug #27200)" do
+        2.times { T.with_options(:show_warnings => false).new("test").clean }
+      end
     end
 
     context "should have method for errors" do
       it "have method for errors" do
         t = T.new("test")
         t.clean
-        t.errors.should == "line 1 column 1 - Warning: missing <!DOCTYPE> declaration\nline 1 column 1 - Warning: plain text isn't allowed in <head> elements\nline 1 column 1 - Warning: inserting missing 'title' element\n"
+        t.errors.should =~ /Warning/
       end
     end
 
