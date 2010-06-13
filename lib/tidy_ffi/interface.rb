@@ -1,3 +1,5 @@
+require 'date'
+
 # Low level interface to libtidy.
 class TidyFFI::Interface
   LibTidy = TidyFFI::LibTidy

@@ -1,8 +1,8 @@
 require 'test/unit'
 
+require 'rubygems'
 require 'tidy_ffi'
 
-require 'rubygems'
 require 'rr'
 require 'matchy'
 require 'context'

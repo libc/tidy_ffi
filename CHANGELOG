@@ -1,3 +1,4 @@
+v0.1.3. Fix recognition of date on weird environments
 v0.1.2. Initialize buffer before use
 v0.1.1. Fixes for new version of FFI gem
 v0.1.0. Clean class method.
