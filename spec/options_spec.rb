@@ -1,8 +1,8 @@
-require File.join(File.dirname(__FILE__), 'test_helper')
+require 'spec_helper'
 
-class TestOptions < Test::Unit::TestCase
+describe TidyFFI::Tidy, 'options' do
   T = TidyFFI::Tidy
-  context "public interface" do
+  describe "public interface" do
     [:default_options, :default_options=, :with_options, :validate_options].each do |method|
       it "responds to #{method}" do
         T.respond_to?(method)
@@ -10,7 +10,7 @@ class TestOptions < Test::Unit::TestCase
     end
   end
 
-  context "default_options method" do
+  describe "#default_options" do
     before :each do
       T.default_options.clear!
       T.validate_options = false
@@ -47,7 +47,7 @@ class TestOptions < Test::Unit::TestCase
     end
   end
 
-  context "options method" do
+  describe "#options" do
     before :each do
       T.validate_options = false
       T.default_options.clear!
@@ -71,7 +71,7 @@ class TestOptions < Test::Unit::TestCase
       end
     end
 
-    context "clear! method" do
+    describe "#clear!" do
       it "clears options' options" do
         @t.options.test = 1
         @t.options.clear!
@@ -107,7 +107,7 @@ class TestOptions < Test::Unit::TestCase
     end
   end
 
-  context "with_options proxy class" do
+  describe "with_options proxy class" do
     before :each do
       T.validate_options = false
     end
