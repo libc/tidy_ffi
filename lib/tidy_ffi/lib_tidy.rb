@@ -37,7 +37,7 @@ class TidyFFI::LibTidy #:nodoc:
   attach_function :tidyOptIsReadOnly, [:pointer], :int
   attach_function :tidyOptGetPickList, [:pointer], :pointer
   attach_function :tidyOptGetNextPick, [:pointer, :pointer], :string
-  
+
   #types
   # /** Option data types
   # */
@@ -48,7 +48,7 @@ class TidyFFI::LibTidy #:nodoc:
   #   TidyBoolean          /**< Boolean flag */
   # } TidyOptionType;
   TIDY_OPTION_TYPE = [:string, :integer, :boolean].freeze
-  
+
 end
 
 class TidyFFI::LibTidy::TidyBuf < FFI::Struct #:nodoc:
