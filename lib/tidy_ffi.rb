@@ -3,6 +3,8 @@ require 'ffi'
 module TidyFFI
   self.autoload :LibTidy, 'tidy_ffi/lib_tidy'
   self.autoload :Interface, 'tidy_ffi/interface'
+
+  class LibTidyNotInstalled < StandardError; end
 end
 
 require 'tidy_ffi/options_container'
