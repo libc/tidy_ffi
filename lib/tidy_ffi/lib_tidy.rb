@@ -3,7 +3,14 @@
 # This file must be lazy loaded!
 class TidyFFI::LibTidy #:nodoc:
   extend FFI::Library
-  ffi_lib TidyFFI.library_path
+
+  paths = Array(TidyFFI.library_path || Dir['/{opt,usr}/{,local/}lib{,64}/libtidy.{dylib,so*}'])
+  begin
+    ffi_lib(*paths)
+  rescue LoadError
+    raise TidyFFI::LibTidyNotInstalled, "didn't find tidy libs on your system. Please install tidy (http://tidy.sourceforge.net/)"
+  end
+
 
   attach_function :tidyReleaseDate, [], :string
 
