@@ -121,40 +121,40 @@ class TidyFFI::Interface
 
       @default_options = {}
 
-      FFI::MemoryPointer.new(:pointer, 1) do |pointer|
-        pointer.put_pointer(0, iterator)
+      pointer = FFI::MemoryPointer.new(:pointer, 1)
+      pointer.put_pointer(0, iterator)
 
-        until iterator.null?
-          opt = LibTidy.tidyGetNextOption(doc, pointer)
+      until iterator.null?
+        opt = LibTidy.tidyGetNextOption(doc, pointer)
 
-          option = {}
+        option = {}
 
-          option[:name] = LibTidy.tidyOptGetName(opt).gsub('-', '_').intern
-          option[:readonly?] = LibTidy.tidyOptIsReadOnly(opt) != 0
-          option[:type] = LibTidy::TIDY_OPTION_TYPE[LibTidy.tidyOptGetType(opt)]
-          option[:default] = case option[:type]
-          when :string
-            (LibTidy.tidyOptGetDefault(opt) rescue "")
-          when :integer
-            if pick_list = pick_list_for(opt)
-              option[:type] = :enum
-              option[:values] = pick_list
-              pick_list[LibTidy.tidyOptGetDefaultInt(opt)]
-            else
-              LibTidy.tidyOptGetDefaultInt(opt)
-            end
-          when :boolean
-            LibTidy.tidyOptGetDefaultBool(opt) != 0
+        option[:name] = LibTidy.tidyOptGetName(opt).gsub('-', '_').intern
+        option[:readonly?] = LibTidy.tidyOptIsReadOnly(opt) != 0
+        option[:type] = LibTidy::TIDY_OPTION_TYPE[LibTidy.tidyOptGetType(opt)]
+        option[:default] = case option[:type]
+        when :string
+          (LibTidy.tidyOptGetDefault(opt) rescue "")
+        when :integer
+          if pick_list = pick_list_for(opt)
+            option[:type] = :enum
+            option[:values] = pick_list
+            pick_list[LibTidy.tidyOptGetDefaultInt(opt)]
+          else
+            LibTidy.tidyOptGetDefaultInt(opt)
           end
-
-          @default_options[option[:name]] = option
-
-          iterator = pointer.get_pointer(0)
+        when :boolean
+          LibTidy.tidyOptGetDefaultBool(opt) != 0
         end
 
+        @default_options[option[:name]] = option
+
+        iterator = pointer.get_pointer(0)
       end
+
       @default_options.freeze
     ensure
+      pointer.free if pointer
       LibTidy.tidyRelease(doc)
     end
     private :load_default_options
