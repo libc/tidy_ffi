@@ -186,7 +186,7 @@ class TidyFFI::Interface
       if Integer === value
         !!spec[:values][value]
       else
-        spec[:values].include?(value)
+        spec[:values].include?(value.downcase)
       end
     when :string
       String === value || Symbol === value

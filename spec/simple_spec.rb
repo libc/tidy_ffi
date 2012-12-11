@@ -49,5 +49,10 @@ describe TidyFFI::Tidy do
         TidyFFI::Tidy.default_options = {:force_output => "utter garbage"}
       end.should raise_error(TidyFFI::Tidy::InvalidOptionValue)
     end
+
+    it 'accepts UTF-8 writter in uppercase' do
+      TidyFFI::Tidy.validate_options = true
+      expect { TidyFFI::Tidy.default_options = {:char_encoding => "UTF8"} }.not_to raise_error
+    end
   end
 end
