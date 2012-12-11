@@ -48,12 +48,12 @@ class TidyFFI::OptionsContainer #:nodoc:
   # It's a kinda bad method: it uses TidyFFI::Interface.option_valid and TidyFFI::Tidy.validate_options?
   # Also it do second lookup into default options
   def validate_option(key, value)
-    if TidyFFI::Tidy.validate_options? && !TidyFFI::Interface.option_valid?(key, value)
-      if TidyFFI::Interface.default_options[key]
-        raise TidyFFI::Tidy::InvalidOptionValue, "#{value} is not valid for #{key}"
-      else
-        raise TidyFFI::Tidy::InvalidOptionName, "#{key} is invalid option name"
-      end
+    return if !TidyFFI::Tidy.validate_options? || TidyFFI::Interface.option_valid?(key, value)
+
+    if TidyFFI::Interface.default_options[key]
+      raise TidyFFI::Tidy::InvalidOptionValue, "#{value} is not a valid value for key #{key}"
+    else
+      raise TidyFFI::Tidy::InvalidOptionName, "#{key} is an invalid option name"
     end
   end
 

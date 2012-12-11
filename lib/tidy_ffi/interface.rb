@@ -111,7 +111,7 @@ class TidyFFI::Interface
       pick_list
     end
     private :pick_list_for
-    
+
     # Loads default options.
     def load_default_options
       return if @default_options
@@ -171,11 +171,12 @@ class TidyFFI::Interface
   def self.default_options
     @default_options ||= load_default_options
   end
-  
+
   # Returns true if value is valid for +option+ and false otherwise.
   def self.option_valid?(option, value)
-    return false unless spec = default_options[option]
-    
+    spec = default_options[option]
+    return false unless spec
+
     case spec[:type]
     when :boolean
       true == value || false == value || value == 0 || value == 1 || %w(on off true false 0 1 yes no).include?(value.downcase)

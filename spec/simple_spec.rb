@@ -46,7 +46,7 @@ describe TidyFFI::Tidy do
     it "raises error on invalid option value" do
       TidyFFI::Tidy.validate_options = true
       lambda do
-        TidyFFI::Tidy.default_options = {:force_output => "utter trash"}
+        TidyFFI::Tidy.default_options = {:force_output => "utter garbage"}
       end.should raise_error(TidyFFI::Tidy::InvalidOptionValue)
     end
   end
