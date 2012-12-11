@@ -100,15 +100,16 @@ class TidyFFI::Interface
 
       pick_list = []
 
-      FFI::MemoryPointer.new(:pointer, 1) do |pointer|
-        pointer.put_pointer(0, iterator)
-        until iterator.null?
-          pick_list << LibTidy.tidyOptGetNextPick(opt, pointer)
-          iterator = pointer.get_pointer(0)
-        end
+      pointer = FFI::MemoryPointer.new(:pointer, 1)
+      pointer.put_pointer(0, iterator)
+      until iterator.null?
+        pick_list << LibTidy.tidyOptGetNextPick(opt, pointer)
+        iterator = pointer.get_pointer(0)
       end
 
       pick_list
+    ensure
+      pointer.free if pointer
     end
     private :pick_list_for
 
