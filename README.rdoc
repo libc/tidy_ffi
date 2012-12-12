@@ -2,20 +2,20 @@
 
 == What is it all about?
 
-I wanna clean and simple tidy library. For example:
+I wanted to have a clean and simple tidy library. For example:
   TidyFFI::Tidy.new('a string').clean
 
 For now it can't do anything else than clean (and saves errors from it) :)
 
 == Options
 
-You can use different ways to set up options. These examples are produces the same output:
+You can use different ways to specify options. These examples produce the same output:
 
   TidyFFI::Tidy.default_options.show_body_only = true
   TidyFFI::Tidy.new('test').clean
-  
+
   TidyFFI::Tidy.with_options(:show_body_only => true).new('test').clean
-  
+
   tidy = TidyFFI::Tidy.new('test')
   tidy.options.show_body_only = true
   tidy.clean
@@ -24,8 +24,6 @@ You can use different ways to set up options. These examples are produces the sa
 
   TidyFFI::Tidy.clean('test', :show_body_only => 1)
 
-== Links
+== Other stuff
 
-* Source code: http://github.com/libc/tidy_ffi
-* Bug tracker: http://rubyforge.org/tracker/?atid=30230&group_id=7805&func=browse
-* Rubyforge project: http://rubyforge.org/projects/tidy-ffi
+And of course, it's depenedent on ffi and libtidy. So make sure they're installed before using the library!
