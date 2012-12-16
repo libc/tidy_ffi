@@ -1,3 +1,6 @@
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq libtidy-dev
 rvm:
   - 1.8.7
   - ree
