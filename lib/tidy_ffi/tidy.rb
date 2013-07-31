@@ -64,7 +64,7 @@ class TidyFFI::Tidy
 
     # Default options for tidy. Works just like options= method
     def default_options=(options)
-      @default_options.merge_with_options(options)
+      default_options.merge_with_options(options)
     end
 
     # Returns a proxy class with options.
