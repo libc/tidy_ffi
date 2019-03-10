@@ -20,7 +20,7 @@ describe TidyFFI::Interface do
     end
 
     it "accepts yes, no, 1, 0, true, false as boolean values" do
-      stub(I).default_options { {:gobbledygook => {:type => :boolean}} }
+      I.stubs(:default_options).returns({:gobbledygook => {:type => :boolean}})
 
       %w{yes no 1 0 true false on off YeS}.each do |val|
         I.option_valid?(:gobbledygook, val).should == true
@@ -34,7 +34,7 @@ describe TidyFFI::Interface do
     end
 
     it "accepts a number as a valid integer value" do
-      stub(I).default_options { {:gobbledygook => {:type => :integer}} }
+      I.stubs(:default_options).returns({:gobbledygook => {:type => :integer}})
 
       I.option_valid?(:gobbledygook, 1).should == true
       I.option_valid?(:gobbledygook, 0).should == true
@@ -47,7 +47,7 @@ describe TidyFFI::Interface do
     end
 
     it "accepts any string as a valid string value" do
-      stub(I).default_options { {:gobbledygook => {:type => :string}} }
+      I.stubs(:default_options).returns({:gobbledygook => {:type => :string}})
 
       I.option_valid?(:gobbledygook, 1).should == false
       I.option_valid?(:gobbledygook, 0).should == false
@@ -60,13 +60,13 @@ describe TidyFFI::Interface do
     end
 
     it "accepts a symbols as a valid string value" do
-      stub(I).default_options { {:gobbledygook => {:type => :string}} }
+      I.stubs(:default_options).returns({:gobbledygook => {:type => :string}})
 
       I.option_valid?(:gobbledygook, :test).should == true
     end
 
     it "accepts number in range as a valid enum value" do
-      stub(I).default_options { {:gobbledygook => {:type => :enum, :values => ["one", "two"]}} }
+      I.stubs(:default_options).returns({:gobbledygook => {:type => :enum, :values => ["one", "two"]}})
 
       I.option_valid?(:gobbledygook, 1).should == true
       I.option_valid?(:gobbledygook, 0).should == true
@@ -74,7 +74,7 @@ describe TidyFFI::Interface do
     end
 
     it "accepts string representation of enum value" do
-      stub(I).default_options { {:gobbledygook => {:type => :enum, :values => ["one", "two"]}} }
+      I.stubs(:default_options).returns({:gobbledygook => {:type => :enum, :values => ["one", "two"]}})
 
       I.option_valid?(:gobbledygook, "one").should == true
       I.option_valid?(:gobbledygook, "two").should == true
