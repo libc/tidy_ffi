@@ -4,7 +4,7 @@
 class TidyFFI::LibTidy #:nodoc:
   extend FFI::Library
 
-  paths = Array(TidyFFI.library_path || Dir['/{opt,usr}/{,local/}lib{,64}/libtidy{,-*}.{dylib,so*}'])
+  paths = Array(TidyFFI.library_path || Dir['/{opt,usr}/{,local/}lib{,64}/{,x86_64-linux-gnu/}libtidy{,-*}.{dylib,so*}'])
   begin
     ffi_lib(*paths)
   rescue LoadError
