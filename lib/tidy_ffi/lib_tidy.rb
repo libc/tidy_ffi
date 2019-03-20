@@ -4,9 +4,10 @@
 class TidyFFI::LibTidy #:nodoc:
   extend FFI::Library
 
-  paths = Array(TidyFFI.library_path || Dir['/{opt,usr}/{,local/}lib{,64}/{,x86_64-linux-gnu/}libtidy{,-*}.{dylib,so*}'])
+  LIB_NAME = 'tidy'.freeze
+  PATHS = Array([LIB_NAME] + Dir['/{opt,usr}/{,local/}lib{,64}/libtidy{,-*}.{dylib,so*}']).freeze
   begin
-    ffi_lib(*paths)
+    ffi_lib(TidyFFI.library_path || PATHS)
   rescue LoadError
     raise TidyFFI::LibTidyNotInstalled, "didn't find tidy libs on your system. Please install tidy (http://tidy.sourceforge.net/)"
   end
