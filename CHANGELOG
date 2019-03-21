@@ -1,3 +1,4 @@
+v1.0.0. Support Debian buster by delegating library lookup to FFI gem (thanks to Laurent Arnoud (@spk))
 v0.1.6. Relax version constraint of the FFI gem dependency
 v0.1.5. Fix JRuby issues.
 v0.1.4. Fix the way libtidy is located on the filesystem. Works if libtidy is in /usr/lib64, instead of /usr/lib
