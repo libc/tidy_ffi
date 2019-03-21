@@ -1,0 +1,16 @@
+FROM debian:buster-slim
+
+WORKDIR /usr/local/src
+RUN set -ex \
+    && apt-get update -qqy \
+    && apt-get -qqy --no-install-recommends install \
+        build-essential ruby-dev bundler git wget cmake \
+    && apt-get purge -y \
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN wget https://github.com/htacg/tidy-html5/archive/5.6.0.tar.gz
+RUN tar -zxvf 5.6.0.tar.gz
+RUN cd tidy-html5-5.6.0 && cmake -DCMAKE_INSTALL_PREFIX=/opt/ . && make all install
+COPY . .
+RUN bundle install && rake
