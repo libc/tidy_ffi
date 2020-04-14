@@ -5,7 +5,8 @@ class TidyFFI::LibTidy #:nodoc:
   extend FFI::Library
 
   LIB_NAME = 'tidy'.freeze
-  PATHS = Array([LIB_NAME] + Dir['/{opt,usr}/{,local/}lib{,64}/libtidy{,-*}.{dylib,so*}']).freeze
+  PATH_GLOB = '/{opt,usr}/{,local/}lib{,64}/{,x86_64-linux-gnu/}libtidy{,-*}.{dylib,so*}'
+  PATHS = Array([LIB_NAME] + Dir[PATH_GLOB]).freeze
   begin
     ffi_lib(TidyFFI.library_path || PATHS)
   rescue LoadError
