@@ -4,8 +4,22 @@
 class TidyFFI::LibTidy #:nodoc:
   extend FFI::Library
 
-  LIB_NAME = 'tidy'.freeze
-  PATHS = Array([LIB_NAME] + Dir['/{opt,usr}/{,local/}lib{,64}/libtidy{,-*}.{dylib,so*}']).freeze
+  # Set paths to lib tidy library.
+  #
+  # There are 3 things to note here:
+  #
+  # 1. The best way to set the path is just specify tidy, that works if development
+  # packages are installed.
+  #
+  # 2. https://github.com/ffi/ffi/wiki/Loading-Libraries#linux-packages says that
+  # to support systems without development packages, by specifying the specific
+  # version. If it doesn't work on your system, please consider adding it here,
+  # and dropping the old versions, when become obsolete
+  #
+  # 3. Absolute paths (looking in a bunch of directories). I consider this
+  # deprecated way of setting the path. If you ever change the major version
+  # please remove it
+  PATHS = Array(['tidy', 'tidy.so.5deb1'] + Dir['/{opt,usr}/{,local/}lib{,64}/libtidy{,-*}.{dylib,so*}']).freeze
   begin
     ffi_lib(TidyFFI.library_path || PATHS)
   rescue LoadError
