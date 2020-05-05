@@ -1,3 +1,4 @@
+v1.0.1. Support Debian buster (and official ruby image) without development packages installed (thanks to Rodrigo Rosenfeld Rosas (@rosenfeld))
 v1.0.0. Support Debian buster by delegating library lookup to FFI gem (thanks to Laurent Arnoud (@spk))
 v0.1.6. Relax version constraint of the FFI gem dependency
 v0.1.5. Fix JRuby issues.
